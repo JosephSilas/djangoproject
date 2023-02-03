@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% load cart_tag %}
+{% load humanize %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="">
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key,value in request.session.cart.items %}
+            <tr class="my-3">
+                <th class="text-left flex items-center py-6">
+                    <img src="{{value.image}}" alt="" class="w-10 h-10">
+                    <p>{{value.name}}</p>
+                    </th>
+            <td class="py-6 px-2">
+                <div class="flex">
+                    <form class="decrement_btn">
+                        {% csrf_token %}
+                        <input type="hidden" name="" id="product_id" value="{{value.product_id}}">
+                        <button class="text-[1.5rem] px-2 border-1">-</button>
+                    </form>
+                    <form class="increament_btn">
+                        {% csrf_token %}
+                        <input type="hidden" name="" id="product_id" value="{{value.product_id}}">
+                    <button class="text-[1.5rem] border-r px-2">+</button>
+                    </form>
+                    <span class="text-[1.5rem] px-2">{{value.quantity}}</span>
+                    
+                </div>
+            </td>
+            <td class="px-2">
+            <p class="mb-3 font-bold">
+                ₦{{value.price|intcomma}}
+            </p>
+            <p class="italic">Total: ₦{{value.price|multiply:value.quantity}}</p>
+            </td>
+            <td>
+            <form class="delete_btn">
+                {% csrf_token %}
+                <input type="hidden" name="" id="product_id" value="{{value.product_id}}">
+             <button class="text-rose-700">delete</button>
+            </form>
+        </td>
+           </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+{% endblock  %}

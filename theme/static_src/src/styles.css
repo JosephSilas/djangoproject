@@ -1,0 +1,11 @@
+#id_email, #id_firstname, #id_lastname, #id_password1, #id_password2, #id_username, #id_password{
+    width: 100% !important
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.grid-row-product{
+    grid-template-rows: 40% 60%;
+}
+

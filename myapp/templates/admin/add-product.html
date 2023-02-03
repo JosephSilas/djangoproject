@@ -1,0 +1,26 @@
+{% extends 'admin/admin-layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <form action="{% url 'upload_product' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" class="form-control  border" name="name" placeholder="Item name">
+                <div class="row my-3">
+                    <div class="col"><input type="number" class="form-control border" name="price" placeholder="Item Price"></div>
+                    <div class="col"><input type="number" class="form-control border" name="quantity" placeholder="Item Quantity"></div>
+
+                </div>
+                {{form.description}}
+                {{form.image}}  
+            <button class="btn btn-primary" >Submit</button>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
